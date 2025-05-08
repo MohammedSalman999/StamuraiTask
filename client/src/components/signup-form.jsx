@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signupSchema } from "@/schemas/signupschema"; // Importing the schema
+import { signupSchema } from "../schemas/signupschema"; // Importing the schema
 import {
   Form,
   FormField,
