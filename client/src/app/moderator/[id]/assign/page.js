@@ -1,14 +1,21 @@
-"use client"
+"use client";
 
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useEffect, useState } from "react"
-import axios from "axios"
-import { toast } from "sonner"
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { toast } from "sonner";
 
-import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -17,14 +24,13 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 
-
-import { moderatorSchema } from "@/schemas/ModeratorSchema"
+import { moderatorSchema } from "@/schemas/ModeratorSchema";
 
 export default function ModeratorDashboardAssign() {
-  const [users, setUsers] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(moderatorSchema),
@@ -35,50 +41,57 @@ export default function ModeratorDashboardAssign() {
       priority: "medium",
       assignedTo: "",
     },
-  })
+  });
 
   useEffect(() => {
-    fetchAllUsers()
-  }, [])
+    fetchAllUsers();
+  }, []);
 
   const fetchAllUsers = async () => {
     try {
-      setIsLoading(true)
-      const accessToken = localStorage.getItem("accessToken")
-      const response = await axios.get(`http://localhost:5000/api/moderators/users`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      setUsers(response.data.users || [])
+      setIsLoading(true);
+      const accessToken = localStorage.getItem("accessToken");
+      const response = await axios.get(
+        `https://stamuraitask.onrender.com/api/moderators/users`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      setUsers(response.data.users || []);
     } catch (error) {
-      console.error("Error fetching users:", error)
-      toast.error("Failed to fetch users")
+      console.error("Error fetching users:", error);
+      toast.error("Failed to fetch users");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const onSubmit = async (formData) => {
     const taskData = {
       ...formData,
       dueDate: new Date(formData.dueDate).toISOString(),
     };
-  
+
     console.log("🚀 Submitting task data:", taskData); // ✅ LOG ADDED
     console.log("AssignedTo ID being sent:", taskData.assignedTo); // ✅ LOG ADDED
-  
+
     try {
       setIsLoading(true);
       const accessToken = localStorage.getItem("accessToken");
-      await axios.post("http://localhost:5000/api/moderators/assign", taskData, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-  
+      await axios.post(
+        "https://stamuraitask.onrender.com/api/moderators/assign",
+        taskData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
       toast.success("Task assigned successfully");
-      console.log("Task Assigned Successfully")
+      console.log("Task Assigned Successfully");
       form.reset({
         title: "",
         description: "",
@@ -87,13 +100,15 @@ export default function ModeratorDashboardAssign() {
         assignedTo: "",
       });
     } catch (error) {
-      console.error("❌ Assigning task failed:", error.response?.data || error.message); // ✅ LOG IMPROVED
+      console.error(
+        "❌ Assigning task failed:",
+        error.response?.data || error.message
+      ); // ✅ LOG IMPROVED
       toast.error("Failed to assign task. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
-
 
   return (
     <div className="max-w-md mx-auto mt-5 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
@@ -217,5 +232,5 @@ export default function ModeratorDashboardAssign() {
         </form>
       </Form>
     </div>
-  )
+  );
 }
