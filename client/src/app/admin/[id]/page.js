@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import * as XLSX from "xlsx"
-import { useState, useEffect, useCallback } from "react"
-import { useRouter } from "next/navigation"
-import axios from "axios"
-import { motion } from "framer-motion"
-import { FileDown } from "lucide-react"
-import { ModeToggle } from "@/components/mode-toggle"
-import { AppSidebar } from "@/components/sidebar/app-sidebar"
+import * as XLSX from "xlsx";
+import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { motion } from "framer-motion";
+import { FileDown } from "lucide-react";
+import { ModeToggle } from "@/components/mode-toggle";
+import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import {
   SidebarInset,
   SidebarProvider,
@@ -16,11 +16,11 @@ import {
   SidebarGroupLabel,
   SidebarMenuButton,
   SidebarContent,
-} from "@/components/ui/sidebar"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+} from "@/components/ui/sidebar";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import TailwindLoadingSpinner from "@/components/TailwindLoadingSpinner"
-import TaskChart from "@/components/TaskChart"
+import TailwindLoadingSpinner from "@/components/TailwindLoadingSpinner";
+import TaskChart from "@/components/TaskChart";
 
 const cardVariants = {
   hidden: { opacity: 0, scale: 0.8 },
@@ -29,70 +29,77 @@ const cardVariants = {
     scale: 1,
     transition: { duration: 0.5 },
   },
-}
+};
 
 const AnimatedNumber = ({ value }) => {
   return (
-    <motion.span initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+    <motion.span
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       {value}
     </motion.span>
-  )
-}
+  );
+};
 
 export default function AdminDashboardPage({ params }) {
-  const { id } = params
-  const [dashboardData, setDashboardData] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const router = useRouter()
+  const { id } = params;
+  const [dashboardData, setDashboardData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const router = useRouter();
 
   const fetchDashboardData = useCallback(async () => {
-    const storedUser = localStorage.getItem("user")
-    const accessToken = localStorage.getItem("accessToken")
+    const storedUser = localStorage.getItem("user");
+    const accessToken = localStorage.getItem("accessToken");
 
     if (!storedUser || !accessToken) {
-      router.push("/login")
-      return
+      router.push("/login");
+      return;
     }
 
     try {
-      setLoading(true)
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/admin/${id}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      setDashboardData(response.data)
-      setError(null)
+      setLoading(true);
+      const response = await axios.get(
+        "https://stamuraitask.onrender.com/admin/${id}",
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      setDashboardData(response.data);
+      setError(null);
     } catch (error) {
-      console.error("Error fetching dashboard data:", error)
-      setError("Failed to fetch dashboard data. Please try again.")
+      console.error("Error fetching dashboard data:", error);
+      setError("Failed to fetch dashboard data. Please try again.");
       if (error.response && error.response.status === 401) {
-        localStorage.removeItem("user")
-        localStorage.removeItem("accessToken")
-        router.push("/login")
+        localStorage.removeItem("user");
+        localStorage.removeItem("accessToken");
+        router.push("/login");
       }
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [id, router])
+  }, [id, router]);
 
   useEffect(() => {
-    fetchDashboardData()
-    const interval = setInterval(fetchDashboardData, 30000)
-    return () => clearInterval(interval)
-  }, [fetchDashboardData])
+    fetchDashboardData();
+    const interval = setInterval(fetchDashboardData, 30000);
+    return () => clearInterval(interval);
+  }, [fetchDashboardData]);
 
   if (loading) {
-    return <TailwindLoadingSpinner message="Loading Admin's Dashboard ..." />
+    return <TailwindLoadingSpinner message="Loading Admin's Dashboard ..." />;
   }
 
   if (error) {
-    return <div className="text-red-500 text-center mt-8">{error}</div>
+    return <div className="text-red-500 text-center mt-8">{error}</div>;
   }
 
   if (!dashboardData) {
-    return <div className="text-center mt-8">No data available</div>
+    return <div className="text-center mt-8">No data available</div>;
   }
 
   // excel functionality
@@ -103,15 +110,15 @@ export default function AdminDashboardPage({ params }) {
       "Pending Tasks": item.pending,
       "Cancelled Tasks": item.cancelled,
       "Total Tasks": item.total,
-    }))
+    }));
 
-    const wb = XLSX.utils.book_new()
+    const wb = XLSX.utils.book_new();
 
-    const ws = XLSX.utils.json_to_sheet(tableData)
-    XLSX.utils.book_append_sheet(wb, ws, "Summary")
+    const ws = XLSX.utils.json_to_sheet(tableData);
+    XLSX.utils.book_append_sheet(wb, ws, "Summary");
 
-    XLSX.writeFile(wb, "AdminDashboard.xlsx")
-  }
+    XLSX.writeFile(wb, "AdminDashboard.xlsx");
+  };
 
   return (
     <SidebarProvider>
@@ -155,7 +162,9 @@ export default function AdminDashboardPage({ params }) {
               <motion.div variants={cardVariants}>
                 <Card className="bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg">
                   <CardHeader className="p-1">
-                    <CardTitle className="text-xl font-medium text-center text-white">Total Users</CardTitle>
+                    <CardTitle className="text-xl font-medium text-center text-white">
+                      Total Users
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="text-4xl text-center font-bold text-white">
@@ -167,7 +176,9 @@ export default function AdminDashboardPage({ params }) {
               <motion.div variants={cardVariants}>
                 <Card className="bg-gradient-to-br from-yellow-400 to-orange-500 shadow-lg">
                   <CardHeader className="p-1">
-                    <CardTitle className="text-xl font-medium text-center text-white">Total Pending Tasks</CardTitle>
+                    <CardTitle className="text-xl font-medium text-center text-white">
+                      Total Pending Tasks
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="text-4xl text-center font-bold text-white">
@@ -179,11 +190,15 @@ export default function AdminDashboardPage({ params }) {
               <motion.div variants={cardVariants}>
                 <Card className="bg-gradient-to-br from-green-400 to-emerald-600 shadow-lg">
                   <CardHeader className="p-1">
-                    <CardTitle className="text-xl font-medium text-center text-white">Total Completed Tasks</CardTitle>
+                    <CardTitle className="text-xl font-medium text-center text-white">
+                      Total Completed Tasks
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="text-4xl text-center font-bold text-white">
-                      <AnimatedNumber value={dashboardData.totalCompletedTasks} />
+                      <AnimatedNumber
+                        value={dashboardData.totalCompletedTasks}
+                      />
                     </div>
                   </CardContent>
                 </Card>
@@ -191,11 +206,15 @@ export default function AdminDashboardPage({ params }) {
               <motion.div variants={cardVariants}>
                 <Card className="bg-gradient-to-br from-red-400 to-red-700 shadow-lg">
                   <CardHeader className="p-1">
-                    <CardTitle className="text-xl font-medium text-center text-white">Total Cancelled Tasks</CardTitle>
+                    <CardTitle className="text-xl font-medium text-center text-white">
+                      Total Cancelled Tasks
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="text-4xl text-center font-bold text-white">
-                      <AnimatedNumber value={dashboardData.totalCancelledTasks} />
+                      <AnimatedNumber
+                        value={dashboardData.totalCancelledTasks}
+                      />
                     </div>
                   </CardContent>
                 </Card>
@@ -204,12 +223,15 @@ export default function AdminDashboardPage({ params }) {
 
             <div className="space-y-4">
               <div className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg">
-                <TaskChart data={dashboardData.monthlyPerformance} title="Monthly Task Performance" />
+                <TaskChart
+                  data={dashboardData.monthlyPerformance}
+                  title="Monthly Task Performance"
+                />
               </div>
             </div>
           </main>
         </div>
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }
