@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -40,7 +40,7 @@ const LoginForm = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/users/login",
+        "https://stamuraitask.onrender.com/api/users/login",
         data,
         {
           withCredentials: true,
@@ -55,19 +55,17 @@ const LoginForm = () => {
 
       // Redirect based on user Role
       if (user.role === "admin") {
-        router.push(`/admin/${user.id}`)
+        router.push(`/admin/${user.id}`);
       } else if (user.role === "user") {
-       
-        router.push(`/user/${user.id}`)
+        router.push(`/user/${user.id}`);
       } else {
-        
-        router.push(`/moderator/${user.id}`)
+        router.push(`/moderator/${user.id}`);
       }
-      toast.success(`Welcome ${user.name}`)
+      toast.success(`Welcome ${user.name}`);
     } catch (error) {
       console.error("Login Failed:", error);
       setError("Login failed. Please check your credentials and try again.");
-      toast.warning(`Login failed For ${user.name}`)
+      toast.warning(`Login failed For ${user.name}`);
     }
   };
 
@@ -75,9 +73,7 @@ const LoginForm = () => {
     <div className="flex items-center justify-center min-h-screen ">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader>
-          <CardTitle className="text-2xl text-center ">
-            Log In
-          </CardTitle>
+          <CardTitle className="text-2xl text-center ">Log In</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>

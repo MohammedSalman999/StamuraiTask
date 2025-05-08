@@ -57,7 +57,7 @@ const SignupForm = () => {
 
       // API call
       const response = await axios.post(
-        "http://localhost:5000/api/users/signup",
+        "https://stamuraitask.onrender.com/api/users/signup",
         formData,
         {
           withCredentials: true,
@@ -74,138 +74,134 @@ const SignupForm = () => {
   };
 
   return (
-    
-      <Card className="relative z-10 items-center justify-center w-full max-w-md ">
-        <CardHeader>
-          <CardTitle className="text-center  text-2xl font-bold">
-            Welcome To Our Platform
-          </CardTitle>
-        </CardHeader>
+    <Card className="relative z-10 items-center justify-center w-full max-w-md ">
+      <CardHeader>
+        <CardTitle className="text-center  text-2xl font-bold">
+          Welcome To Our Platform
+        </CardTitle>
+      </CardHeader>
 
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              {/* Name Field */}
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            {/* Name Field */}
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter your name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Email Field */}
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="Enter your email"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Password Field */}
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      placeholder="Enter your password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="city"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>City</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
-                      <Input placeholder="Enter your name" {...field} />
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your city" />
+                      </SelectTrigger>
                     </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                    <SelectContent>
+                      <SelectItem value="Jabalpur">Jabalpur</SelectItem>
+                      <SelectItem value="Sagar">Sagar</SelectItem>
+                      <SelectItem value="Indore">Indore</SelectItem>
+                      <SelectItem value="Ujjain">Ujjain</SelectItem>
+                      <SelectItem value="Gwalior">Gwalior</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* Avatar Field */}
+            <FormField
+              control={form.control}
+              name="avatar"
+              render={({ field }) => (
+                <FormItem className="form-item">
+                  <FormLabel className="form-label">Avatar</FormLabel>
+                  <FormControl className="form-control">
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => field.onChange(e.target.files[0])}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              {/* Email Field */}
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="Enter your email"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            {/* Submit Button */}
+            <Button type="submit" className="w-full">
+              Sign Up
+            </Button>
+          </form>
+        </Form>
+      </CardContent>
 
-              {/* Password Field */}
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="Enter your password"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="city"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>City</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your city" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="Jabalpur">Jabalpur</SelectItem>
-                        <SelectItem value="Sagar">Sagar</SelectItem>
-                        <SelectItem value="Indore">Indore</SelectItem>
-                        <SelectItem value="Ujjain">Ujjain</SelectItem>
-                        <SelectItem value="Gwalior">Gwalior</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/* Avatar Field */}
-              <FormField
-                control={form.control}
-                name="avatar"
-                render={({ field }) => (
-                  <FormItem className="form-item">
-                    <FormLabel className="form-label">Avatar</FormLabel>
-                    <FormControl className="form-control">
-                      <Input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => field.onChange(e.target.files[0])}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              {/* Submit Button */}
-              <Button type="submit" className="w-full">
-                Sign Up
-              </Button>
-            </form>
-          </Form>
-        </CardContent>
-
-        <CardFooter className="text-center flex flex-col items-center space-y-2">
-          <p className="text-md ">
-            Already have an account ?{" "}
-            <a
-              href="/login"
-              className="font-bold text-blue-500 hover:underline"
-            >
-              Login
-            </a>
-          </p>
-          <p className="text-sm text-muted-foreground">
-            By signing up, you agree to our terms and conditions.
-          </p>
-        </CardFooter>
-      </Card>
+      <CardFooter className="text-center flex flex-col items-center space-y-2">
+        <p className="text-md ">
+          Already have an account ?{" "}
+          <a href="/login" className="font-bold text-blue-500 hover:underline">
+            Login
+          </a>
+        </p>
+        <p className="text-sm text-muted-foreground">
+          By signing up, you agree to our terms and conditions.
+        </p>
+      </CardFooter>
+    </Card>
   );
 };
 
