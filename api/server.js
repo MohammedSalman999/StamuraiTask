@@ -4,8 +4,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./db/db.js";
 import userRouter from "./routes/user.routes.js"; // Importing routes correctly
-import taskRouter from "./routes/task.routes.js"
-import adminRouter from "./routes/admin.routes.js"
+import taskRouter from "./routes/task.routes.js";
+import adminRouter from "./routes/admin.routes.js";
 import moderatorRouter from "./routes/moderator.routes.js";
 dotenv.config();
 const app = express();
@@ -13,7 +13,8 @@ const app = express();
 // CORS ko configure karenge
 app.use(
   cors({
-    origin:  "http://localhost:3000", // frontend ka URL (e.g., http://localhost:5173)
+    // origin:  "http://localhost:3000", // frontend ka URL (e.g., http://localhost:5173)
+    origin: ["http://localhost:3000", "https://stamurai-task.vercel.app"],
     credentials: true, // Allow credentials like cookies
   })
 );
@@ -21,7 +22,6 @@ app.use(
 // Middleware for parsing JSON data
 app.use(express.json()); // Middleware for parsing JSON data
 app.use(cookieParser()); // Cookie parsing middleware
-
 
 // Use the routes with /api/v1 prefix
 app.use("/api/users", userRouter); // Use userRouter for handling routes
