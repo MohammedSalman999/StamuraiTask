@@ -40,7 +40,7 @@ const LoginForm = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        "https://stamuraitask.onrender.com/users/login",
+        "https://stamuraitask.onrender.com/api/users/login",
         data,
         {
           withCredentials: true,

@@ -13,8 +13,9 @@ const app = express();
 // CORS ko configure karenge
 app.use(
   cors({
-    // origin:  "http://localhost:3000", // frontend ka URL (e.g., http://localhost:5173)
-    origin: ["http://localhost:3000", "https://stamurai-task.vercel.app"],
+    // origin: "http://localhost:3000",
+    // frontend ka URL (e.g., http://localhost:5173)
+    origin: "https://stamurai-task.vercel.app",
     credentials: true, // Allow credentials like cookies
   })
 );
