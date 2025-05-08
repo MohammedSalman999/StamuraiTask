@@ -114,9 +114,9 @@ export default function UserDashBoardPage() {
     try {
       let endpoint
       if (action === "complete") {
-        endpoint = `${process.env.NEXT_PUBLIC_API_URL}/tasks/${taskId}/complete`
+        endpoint = `${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${taskId}/complete`
       } else if (action === "cancel") {
-        endpoint = `${process.env.NEXT_PUBLIC_API_URL}/tasks/${taskId}/cancel`
+        endpoint = `${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${taskId}/cancel`
       }
 
       await axios.post(endpoint, formData, {
