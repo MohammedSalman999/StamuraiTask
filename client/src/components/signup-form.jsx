@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupSchema } from "@/schemas/signupSchema";
+import { toast } from "sonner";
 import {
   Form,
   FormField,
@@ -66,6 +67,7 @@ const SignupForm = () => {
       );
       console.log("Form Submitted:", response.data);
       form.reset();
+      toast.success(`sign up success for ${user.name}`);
       router.push("/login");
     } catch (error) {
       console.error("Error submitting form:", error);
