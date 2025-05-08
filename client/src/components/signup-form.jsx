@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signupSchema } from "@/schemas/signupschema"; // Importing the schema
+import signupSchema from "../schemas/signupSchema";
 import {
   Form,
   FormField,
@@ -21,7 +21,7 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation";
 import {
   Select,
   SelectTrigger,
@@ -66,7 +66,7 @@ const SignupForm = () => {
       );
       console.log("Form Submitted:", response.data);
       form.reset();
-       router.push("/login");
+      router.push("/login");
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("An error occurred during signup. Please try again.");
