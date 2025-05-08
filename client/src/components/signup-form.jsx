@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
-import signupSchema from "../schemas/signupSchema";
+import { signupSchema } from "@/schemas/signupschema"; // Importing the schema
 import {
   Form,
   FormField,
@@ -74,10 +74,10 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center relative bg-gray-100">
+      <Card className="relative z-10 w-full max-w-md bg-white">
         <CardHeader>
-          <CardTitle className="text-center text-2xl font-bold">
+          <CardTitle className="text-center text-primary-gradient text-2xl font-bold">
             Welcome To Our Platform
           </CardTitle>
         </CardHeader>
@@ -93,7 +93,7 @@ const SignupForm = () => {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your name.." {...field} />
+                      <Input placeholder="Enter your name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -192,8 +192,8 @@ const SignupForm = () => {
         </CardContent>
 
         <CardFooter className="text-center flex flex-col items-center space-y-2">
-          <p className="text-md">
-            Already have an account?{" "}
+          <p className="text-md text-gray-700">
+            Already have an account ?{" "}
             <a
               href="/login"
               className="font-bold text-blue-500 hover:underline"
