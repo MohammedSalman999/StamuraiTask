@@ -75,7 +75,7 @@ const LoginForm = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader>
-          <CardTitle className="text-2xl text-center text-gray-800">
+          <CardTitle className="text-2xl text-center text-gray-800 dark:text-white">
             Log In
           </CardTitle>
         </CardHeader>
