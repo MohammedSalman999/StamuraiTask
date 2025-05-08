@@ -57,7 +57,7 @@ const SignupForm = () => {
 
       // API call
       const response = await axios.post(
-        "https://stamuraitask.onrender.com/api/users/signup",
+        "https://stamuraitask.onrender.com/users/signup",
         formData,
         {
           withCredentials: true,
