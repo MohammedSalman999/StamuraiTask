@@ -66,7 +66,7 @@ const SignupForm = () => {
         }
       );
       console.log("Form Submitted:", response.data);
-      toast.success(`sign up success for ${user.name}`);
+      toast.success(`sign up success for ${data.name}`);
       form.reset();
       router.push("/login");
     } catch (error) {
