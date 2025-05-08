@@ -30,7 +30,7 @@ export default function ModeratorDashboardCompleted() {
     const accessToken = localStorage.getItem("accessToken");
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/tasks/tasks/completed",
+        "https://stamuraitask.onrender.com/api/tasks/tasks/completed",
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
