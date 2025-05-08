@@ -74,12 +74,22 @@ const SignupForm = () => {
   };
 
   return (
+<<<<<<< HEAD
     <Card className="relative z-10 items-center justify-center w-full max-w-md ">
       <CardHeader>
         <CardTitle className="text-center  text-2xl font-bold">
           Welcome To Our Platform
         </CardTitle>
       </CardHeader>
+=======
+    <div className="flex items-center justify-center min-h-screen">
+      <Card className=" justify-center w-full max-w-md ">
+        <CardHeader>
+          <CardTitle className="text-center  text-2xl font-bold">
+            Welcome To Our Platform
+          </CardTitle>
+        </CardHeader>
+>>>>>>> 283fa1cbcb0e1a4ea453157c5f1faaba9766768e
 
       <CardContent>
         <Form {...form}>
@@ -190,6 +200,7 @@ const SignupForm = () => {
         </Form>
       </CardContent>
 
+<<<<<<< HEAD
       <CardFooter className="text-center flex flex-col items-center space-y-2">
         <p className="text-md ">
           Already have an account ?{" "}
@@ -202,6 +213,96 @@ const SignupForm = () => {
         </p>
       </CardFooter>
     </Card>
+=======
+              {/* Password Field */}
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="Enter your password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="city"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>City</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select your city" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Jabalpur">Jabalpur</SelectItem>
+                        <SelectItem value="Sagar">Sagar</SelectItem>
+                        <SelectItem value="Indore">Indore</SelectItem>
+                        <SelectItem value="Ujjain">Ujjain</SelectItem>
+                        <SelectItem value="Gwalior">Gwalior</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* Avatar Field */}
+              <FormField
+                control={form.control}
+                name="avatar"
+                render={({ field }) => (
+                  <FormItem className="form-item">
+                    <FormLabel className="form-label">Avatar</FormLabel>
+                    <FormControl className="form-control">
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => field.onChange(e.target.files[0])}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Submit Button */}
+              <Button type="submit" className="w-full">
+                Sign Up
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+
+        <CardFooter className="text-center flex flex-col items-center space-y-2">
+          <p className="text-md ">
+            Already have an account ?{" "}
+            <a
+              href="/login"
+              className="font-bold text-blue-500 hover:underline"
+            >
+              Login
+            </a>
+          </p>
+          <p className="text-sm text-muted-foreground">
+            By signing up, you agree to our terms and conditions.
+          </p>
+        </CardFooter>
+      </Card>
+      </div>
+>>>>>>> 283fa1cbcb0e1a4ea453157c5f1faaba9766768e
   );
 };
 
