@@ -75,9 +75,9 @@ const SignupForm = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center relative bg-gray-100">
-      <Card className="relative z-10 w-full max-w-md bg-white">
+      <Card className="relative z-10 w-full max-w-md ">
         <CardHeader>
-          <CardTitle className="text-center text-primary-gradient text-2xl font-bold">
+          <CardTitle className="text-center  text-2xl font-bold">
             Welcome To Our Platform
           </CardTitle>
         </CardHeader>
@@ -192,7 +192,7 @@ const SignupForm = () => {
         </CardContent>
 
         <CardFooter className="text-center flex flex-col items-center space-y-2">
-          <p className="text-md text-gray-700">
+          <p className="text-md ">
             Already have an account ?{" "}
             <a
               href="/login"
