@@ -62,7 +62,7 @@ export default function AdminDashboardPage({ params }) {
     try {
       setLoading(true);
       const response = await axios.get(
-        "https://stamuraitask.onrender.com/api/admin/${id}",
+        `https://stamuraitask.onrender.com/api/admin/${id}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
