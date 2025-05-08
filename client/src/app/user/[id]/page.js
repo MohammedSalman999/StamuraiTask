@@ -74,7 +74,7 @@ export default function UserDashBoardPage() {
     const user = JSON.parse(storedUser)
 
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/${user.id}`, {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${user.id}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
