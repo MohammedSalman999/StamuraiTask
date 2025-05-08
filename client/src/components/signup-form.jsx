@@ -75,7 +75,7 @@ const SignupForm = () => {
 
   return (
     
-      <Card className="relative z-10 w-full max-w-md ">
+      <Card className="relative z-10 items-center justify-center w-full max-w-md ">
         <CardHeader>
           <CardTitle className="text-center  text-2xl font-bold">
             Welcome To Our Platform
@@ -206,7 +206,6 @@ const SignupForm = () => {
           </p>
         </CardFooter>
       </Card>
-    
   );
 };
 
